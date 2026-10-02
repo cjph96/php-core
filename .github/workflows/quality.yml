@@ -22,7 +22,7 @@ jobs:
 
       - name: Install locked development tools
         run: >-
-          docker run --rm --read-only --tmpfs /tmp --cap-drop ALL
+          docker run --rm --user "$(id -u):$(id -g)" --read-only --tmpfs /tmp --cap-drop ALL
           --security-opt no-new-privileges
           -v "$GITHUB_WORKSPACE:/workspace"
           -e COMPOSER_HOME=/tmp/composer-home
@@ -33,14 +33,14 @@ jobs:
           EVIDENCE_DIR: ${{ runner.temp }}/php-core-distribution-evidence
         run: |
           mkdir -p "$EVIDENCE_DIR"
-          docker run --rm --read-only --tmpfs /tmp --cap-drop ALL \
+          docker run --rm --user "$(id -u):$(id -g)" --read-only --tmpfs /tmp --cap-drop ALL \
             --security-opt no-new-privileges \
             -v "$GITHUB_WORKSPACE:/workspace" \
             -v "$EVIDENCE_DIR:/evidence" \
             -e COMPOSER_HOME=/tmp/composer-home \
             -e OUTPUT_DIR=/evidence \
             -w /workspace php-core-dev composer quality && \
-            docker run --rm --read-only --tmpfs /tmp --cap-drop ALL \
+            docker run --rm --user "$(id -u):$(id -g)" --read-only --tmpfs /tmp --cap-drop ALL \
             --security-opt no-new-privileges \
             -v "$GITHUB_WORKSPACE:/workspace" \
             -v "$EVIDENCE_DIR:/evidence" \
