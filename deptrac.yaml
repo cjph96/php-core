@@ -1,0 +1,14 @@
+deptrac:
+  paths:
+    - ./src
+  layers:
+    - name: Core
+      collectors:
+        - type: classLike
+          value: '^CJPH\\Core\\'
+    - name: ForbiddenInfrastructure
+      collectors:
+        - type: classLike
+          value: '^(Symfony|Doctrine|Psr\\Http|GuzzleHttp|Http|Booking|Identity|Aws)\\'
+  ruleset:
+    Core: []

@@ -1,0 +1,65 @@
+{
+    "name": "cjph96/php-core",
+    "description": "A small, framework-independent PHP foundation for shared technical primitives.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cristian J. Pérez Hernández"
+        }
+    ],
+    "require": {
+        "php": "~8.5.0"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "4.7.2",
+        "friendsofphp/php-cs-fixer": "3.95.27",
+        "phpstan/phpstan": "2.2.16",
+        "phpunit/phpunit": "13.3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CJPH\\Core\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CJPH\\Core\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check:manifest": "composer validate --strict",
+        "test": "phpunit",
+        "analyse": "phpstan analyse --no-progress",
+        "lint": "bash scripts/lint-php.sh",
+        "format:check": "php-cs-fixer fix --dry-run --diff --using-cache=no",
+        "format:fix": "php-cs-fixer fix --using-cache=no",
+        "boundaries": "php scripts/check-boundaries.php",
+        "boundary-probes": "php scripts/verify-boundary-guards.php",
+        "architecture": "deptrac analyze --config-file=deptrac.yaml",
+        "security:audit": "composer audit --no-interaction",
+        "consumer-smoke": "bash scripts/consumer-smoke.sh",
+        "distribution-smoke": "bash scripts/distribution-smoke.sh",
+        "quality": [
+            "@check:manifest",
+            "@test",
+            "@lint",
+            "@analyse",
+            "@format:check",
+            "@boundaries",
+            "@boundary-probes",
+            "@architecture",
+            "@security:audit",
+            "@consumer-smoke"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.5.11"
+        },
+        "allow-plugins": {}
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

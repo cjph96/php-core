@@ -1,0 +1,12 @@
+/.github/ export-ignore
+/.php-cs-fixer.dist.php export-ignore
+/.phpstan/ export-ignore
+/composer.lock export-ignore
+/deptrac.yaml export-ignore
+/Dockerfile export-ignore
+/.gitignore export-ignore
+/phpstan.neon export-ignore
+/phpunit.xml export-ignore
+/scripts/ export-ignore
+/tests/ export-ignore
+/vendor/ export-ignore
